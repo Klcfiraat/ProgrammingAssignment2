@@ -1,3 +1,7 @@
+## creates a matrix with getters and setters
+## so regetting of an inverse matrix gets
+## result form cache instead of recalculating
+
 makeCacheMatrix <- function(x = matrix()){
   inv <- NULL
   set <- function(y){
@@ -10,10 +14,14 @@ makeCacheMatrix <- function(x = matrix()){
   list(set = set, get = get, setInverse = setInverse, getInverse = getInverse)
 }
 
+## cache solves the inverse of a matrix
+## if already calculated returns cached
+## results instead
+
 cacheSolve <- function(x, ...){
   inv <- x$getInverse()
   if(!is.null(inv)){
-    message('getting cached data')
+    message('Getting cached data')
     return(inv)
   }
   mat <- x$get()
